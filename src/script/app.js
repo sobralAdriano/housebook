@@ -54,8 +54,43 @@ class Card {
   }
 }
 
-listaDeUsuarios.forEach((usuario) => {
-  cardList.innerHTML += new Card(usuario).renderizar;
-});
+class ControladorNovoUsuario {
+  constructor() {
+    // this.campoNome = document.getElementById("field-nome");
+    // this.campoAvatar = document.getElementById("field-avatar");
+    // this.campoProfissao = document.getElementById("profissao");
+    // this.campoBio = document.getElementById("field-bio");
+  }
+
+  adicionar(evento) {
+    evento.preventDefault();
+
+    let campoNome = document.getElementById.call(document, "field-nome");
+    let campoAvatar = document.getElementById.call(document, "field-avatar");
+    let campoProf = document.getElementById.call(document, "field-profissao");
+    let campoBio = document.getElementById.call(document, "field-bio");
+
+    console.log(campoNome.value);
+
+    let usuarioNovo = new Usuario(
+      campoNome.value,
+      campoAvatar.value,
+      campoProf.value,
+      campoBio.value
+    );
+    listaDeUsuarios.push(usuarioNovo);
+
+    console.log(listaDeUsuarios);
+  }
+}
+
+// listaDeUsuarios.forEach((usuario) => {
+//   cardList.innerHTML += new Card(usuario).renderizar;
+// });
 
 console.log(listaDeUsuarios);
+
+let controlador = new ControladorNovoUsuario();
+document.addEventListener("submit", (evento) => {
+  controlador.adicionar.call(controlador, evento);
+});
