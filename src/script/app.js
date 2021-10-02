@@ -1,8 +1,20 @@
 const cardList = document.querySelector("#card-list"); // div
 
-const listaDeUsuarios = [];
+class RepositorioAmigos {
+  constructor() {
+    this.amigos = JSON.parse(localStorage.getItem("amigos")) || [];
+  }
 
-class Usuario {
+  adicionarAmigo(amigoObj) {
+    this.amigos.push(amigoObj);
+  }
+
+  get lista() {
+    return this.amigos;
+  }
+}
+
+class Amigo {
   constructor(nome, avatar, profissao, bio) {
     this.nome = nome;
     this.avatar = avatar;
@@ -10,30 +22,12 @@ class Usuario {
     this.bio = bio;
   }
 }
-let usuario1 = new Usuario(
-  "Guilherme",
-  "https://randomuser.me/api/portraits/women/33.jpg",
-  "financeiro",
-  "Sou cozinheiro de profissão"
-);
-let usuario2 = new Usuario(
-  "Sabrina",
-  "https://randomuser.me/api/portraits/women/33.jpg",
-  "financeiro",
-  "Aspirante a dev júnior"
-);
-let usuario3 = new Usuario(
-  "Francisco",
-  "https://randomuser.me/api/portraits/women/33.jpg",
-  "jornalista",
-  "Aspirante a dev também"
-);
-
-listaDeUsuarios.push(usuario1);
-listaDeUsuarios.push(usuario2);
-listaDeUsuarios.push(usuario3);
 
 class CardRender {
+  digaOla() {
+    console.log("Ola");
+  }
+
   static renderizar(listaUsuarios) {
     cardList.innerHTML = listaUsuarios
       .map((usuario) => {
@@ -55,35 +49,40 @@ class CardRender {
   }
 }
 
-class ControladorNovoUsuario {
+class ControladorNovoAmigo {
   constructor() {
-    CardRender.renderizar(listaDeUsuarios);
+    this.repositorioAmigos = new RepositorioAmigos();
+    CardRender.renderizar(this.repositorioAmigos.lista);
   }
 
-  adicionar(evento) {
-    evento.preventDefault();
-
+  #criarUmAMigo() {
     let campoNome = document.getElementById("field-nome");
     let campoAvatar = document.getElementById("field-avatar");
     let campoProf = document.getElementById("field-profissao");
     let campoBio = document.getElementById("field-bio");
 
-    let usuarioNovo = new Usuario(
+    return new Amigo(
       campoNome.value,
       campoAvatar.value,
       campoProf.value,
       campoBio.value
     );
-    listaDeUsuarios.push(usuarioNovo);
-    CardRender.renderizar(listaDeUsuarios);
+  }
+
+  #persistirNoLocalStorage(dados) {
+    localStorage.setItem("amigos", JSON.stringify(dados));
+  }
+
+  adicionar(evento) {
+    evento.preventDefault();
+    let novoAmigo = this.#criarUmAMigo();
+    this.repositorioAmigos.adicionarAmigo(novoAmigo);
+    this.#persistirNoLocalStorage(this.repositorioAmigos.lista);
+    CardRender.renderizar(this.repositorioAmigos.lista);
   }
 }
 
-// listaDeUsuarios.forEach((usuario) => {
-//   cardList.innerHTML += new Card(usuario).renderizar;
-// });
-
-let controlador = new ControladorNovoUsuario();
+let controlador = new ControladorNovoAmigo();
 
 document.addEventListener("submit", (evento) => {
   controlador.adicionar(evento);

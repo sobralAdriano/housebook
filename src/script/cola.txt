@@ -99,3 +99,27 @@ export default class Usuario {
     </div>`;
   }
 }
+
+
+let usuario1 = new Amigo(
+  "Guilherme",
+  "https://randomuser.me/api/portraits/women/33.jpg",
+  "financeiro",
+  "Sou cozinheiro de profissão"
+);
+let usuario2 = new Amigo(
+  "Sabrina",
+  "https://randomuser.me/api/portraits/women/33.jpg",
+  "financeiro",
+  "Aspirante a dev júnior"
+);
+let usuario3 = new Amigo(
+  "Francisco",
+  "https://randomuser.me/api/portraits/women/33.jpg",
+  "jornalista",
+  "Aspirante a dev também"
+);
+
+listaDeUsuarios.push(usuario1);
+listaDeUsuarios.push(usuario2);
+listaDeUsuarios.push(usuario3);
