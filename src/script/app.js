@@ -18,9 +18,8 @@ import CardRender from "./ui/card-render.js";
 class ControladorNovoAmigo {
   constructor() {
     this.repositorioAmigos = new RepositorioAmigos();
-    new CardRender(document.querySelector("#card-list")).renderizar(
-      this.repositorioAmigos.lista
-    );
+    this.cardRender = new CardRender(document.querySelector("#card-list"));
+    this.cardRender.renderizar(this.repositorioAmigos.lista);
   }
 
   #criarUmAMigo() {
@@ -46,7 +45,7 @@ class ControladorNovoAmigo {
     let novoAmigo = this.#criarUmAMigo();
     this.repositorioAmigos.adicionarAmigo(novoAmigo);
     this.#persistirNoLocalStorage(this.repositorioAmigos.lista);
-    CardRender.renderizar(this.repositorioAmigos.lista);
+    this.cardRender.renderizar(this.repositorioAmigos.lista);
   }
 }
 
