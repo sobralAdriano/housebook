@@ -1,58 +1,26 @@
-const cardList = document.querySelector("#card-list"); // div
+import RepositorioAmigos from "./bd/repositorio-amigos.js";
+import Amigo from "./usuario/amigo-modelo.js";
+import CardRender from "./ui/card-render.js";
 
-class RepositorioAmigos {
-  constructor() {
-    this.amigos = JSON.parse(localStorage.getItem("amigos")) || [];
-  }
-
-  adicionarAmigo(amigoObj) {
-    this.amigos.push(amigoObj);
-  }
-
-  get lista() {
-    return this.amigos;
-  }
-}
-
-class Amigo {
-  constructor(nome, avatar, profissao, bio) {
-    this.nome = nome;
-    this.avatar = avatar;
-    this.profissao = profissao;
-    this.bio = bio;
-  }
-}
-
-class CardRender {
-  digaOla() {
-    console.log("Ola");
-  }
-
-  static renderizar(listaUsuarios) {
-    cardList.innerHTML = listaUsuarios
-      .map((usuario) => {
-        return `
-            <div class='card'>
-              <div class="avatar">
-                <img src="${usuario.avatar}">
-              </div>
-              <h2>${usuario.nome}</h2>
-              <span>${usuario.profissao}</span>
-              <div class="card-content">
-                <h2>Bio:</h2>
-                <p>${usuario.bio}</p>
-              </div>
-            </div>
-           `;
-      })
-      .join("");
-  }
-}
+// DESAFIO!!
+// Separar o ControladorNovoAmigo em um módulo específico
+// Dicas:
+// 1) todos os elementos html precisam ser buscados no app.js
+// 2) O constructor do ControladorNovoAmigo receberá esses elementos
+//
+// OUTRO DESAFIO!!
+// Criar métodos para deletar um amigo da lista!
+// Dicas:
+// O controlador deve ter um metodo "apagar" (ou similar), que será passado como argumento a um listener do botão de excluir
+//
+//
 
 class ControladorNovoAmigo {
   constructor() {
     this.repositorioAmigos = new RepositorioAmigos();
-    CardRender.renderizar(this.repositorioAmigos.lista);
+    new CardRender(document.querySelector("#card-list")).renderizar(
+      this.repositorioAmigos.lista
+    );
   }
 
   #criarUmAMigo() {
