@@ -33,44 +33,40 @@ listaDeUsuarios.push(usuario1);
 listaDeUsuarios.push(usuario2);
 listaDeUsuarios.push(usuario3);
 
-class Card {
-  constructor(usuario) {
-    this.usuarioObj = usuario;
-  }
-
-  get renderizar() {
-    return `
-    <div class='card'>
-      <div class="avatar">
-        <img src="${this.usuarioObj.avatar}">
-      </div>
-      <h2>${this.usuarioObj.nome}</h2>
-      <span>${this.usuarioObj.profissao}</span>
-      <div class="card-content">
-        <h2>Bio:</h2>
-        <p>${this.usuarioObj.bio}</p>
-      </div>
-    </div>`;
+class CardRender {
+  static renderizar(listaUsuarios) {
+    cardList.innerHTML = listaUsuarios
+      .map((usuario) => {
+        return `
+            <div class='card'>
+              <div class="avatar">
+                <img src="${usuario.avatar}">
+              </div>
+              <h2>${usuario.nome}</h2>
+              <span>${usuario.profissao}</span>
+              <div class="card-content">
+                <h2>Bio:</h2>
+                <p>${usuario.bio}</p>
+              </div>
+            </div>
+           `;
+      })
+      .join("");
   }
 }
 
 class ControladorNovoUsuario {
   constructor() {
-    // this.campoNome = document.getElementById("field-nome");
-    // this.campoAvatar = document.getElementById("field-avatar");
-    // this.campoProfissao = document.getElementById("profissao");
-    // this.campoBio = document.getElementById("field-bio");
+    CardRender.renderizar(listaDeUsuarios);
   }
 
   adicionar(evento) {
     evento.preventDefault();
 
-    let campoNome = document.getElementById.call(document, "field-nome");
-    let campoAvatar = document.getElementById.call(document, "field-avatar");
-    let campoProf = document.getElementById.call(document, "field-profissao");
-    let campoBio = document.getElementById.call(document, "field-bio");
-
-    console.log(campoNome.value);
+    let campoNome = document.getElementById("field-nome");
+    let campoAvatar = document.getElementById("field-avatar");
+    let campoProf = document.getElementById("field-profissao");
+    let campoBio = document.getElementById("field-bio");
 
     let usuarioNovo = new Usuario(
       campoNome.value,
@@ -79,8 +75,7 @@ class ControladorNovoUsuario {
       campoBio.value
     );
     listaDeUsuarios.push(usuarioNovo);
-
-    console.log(listaDeUsuarios);
+    CardRender.renderizar(listaDeUsuarios);
   }
 }
 
@@ -88,9 +83,8 @@ class ControladorNovoUsuario {
 //   cardList.innerHTML += new Card(usuario).renderizar;
 // });
 
-console.log(listaDeUsuarios);
-
 let controlador = new ControladorNovoUsuario();
+
 document.addEventListener("submit", (evento) => {
-  controlador.adicionar.call(controlador, evento);
+  controlador.adicionar(evento);
 });
