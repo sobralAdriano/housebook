@@ -1,13 +1,7 @@
-import RepositorioAmigos from "./bd/repositorio-amigos.js";
-import Amigo from "./usuario/amigo-modelo.js";
-import CardRender from "./ui/card-render.js";
+import ControladorNovoAmigo from "./controller/novo-amigo.js";
+import RepositorioAmigos from "./data/amigos.js";
+import CardRender from "./view/card.js";
 
-// DESAFIO!!
-// Separar o ControladorNovoAmigo em um módulo específico
-// Dicas:
-// 1) todos os elementos html precisam ser buscados no app.js
-// 2) O constructor do ControladorNovoAmigo receberá esses elementos
-//
 // OUTRO DESAFIO!!
 // Criar métodos para deletar um amigo da lista!
 // Dicas:
@@ -15,42 +9,20 @@ import CardRender from "./ui/card-render.js";
 //
 //
 
-class ControladorNovoAmigo {
-  constructor() {
-    this.repositorioAmigos = new RepositorioAmigos();
-    this.cardRender = new CardRender(document.querySelector("#card-list"));
-    this.cardRender.renderizar(this.repositorioAmigos.lista);
-  }
-
-  #criarUmAMigo() {
-    let campoNome = document.getElementById("field-nome");
-    let campoAvatar = document.getElementById("field-avatar");
-    let campoProf = document.getElementById("field-profissao");
-    let campoBio = document.getElementById("field-bio");
-
-    return new Amigo(
-      campoNome.value,
-      campoAvatar.value,
-      campoProf.value,
-      campoBio.value
-    );
-  }
-
-  #persistirNoLocalStorage(dados) {
-    localStorage.setItem("amigos", JSON.stringify(dados));
-  }
-
-  adicionar(evento) {
-    evento.preventDefault();
-    let novoAmigo = this.#criarUmAMigo();
-    this.repositorioAmigos.adicionarAmigo(novoAmigo);
-    this.#persistirNoLocalStorage(this.repositorioAmigos.lista);
-    this.cardRender.renderizar(this.repositorioAmigos.lista);
-  }
-}
-
-let controlador = new ControladorNovoAmigo();
+let controlador = new ControladorNovoAmigo(
+  document.getElementById("field-nome"),
+  document.getElementById("field-avatar"),
+  document.getElementById("field-profissao"),
+  document.getElementById("field-bio"),
+  RepositorioAmigos,
+  CardRender
+);
 
 document.addEventListener("submit", (evento) => {
   controlador.adicionar(evento);
 });
+
+// this.campoNome = document.getElementById("field-nome");
+// this.campoAvatar = document.getElementById("field-avatar");
+// this.campoProf = document.getElementById("field-profissao");
+// this.campoBio = document.getElementById("field-bio");

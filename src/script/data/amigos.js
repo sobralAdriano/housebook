@@ -2,7 +2,7 @@ export default class RepositorioAmigos {
   constructor() {
     this.amigos = JSON.parse(localStorage.getItem("amigos")) || [];
     // carga inicial que configuramos na aula
-    data.forEach(amigo => this.amigos.push(amigo))
+    data.forEach((amigo) => this.amigos.push(amigo));
   }
 
   adicionarAmigo(amigoObj) {
@@ -13,7 +13,6 @@ export default class RepositorioAmigos {
     return this.amigos;
   }
 }
-
 
 const data = [
   {
@@ -26,8 +25,7 @@ const data = [
     nome: "Daniel Meireles",
     avatar: "https://github.com/meirelesdev.png",
     profissao: "Desenvolvedor de Software",
-    bio:
-      " Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus veritatis sed quidem earum aliquid quod a non accusantium? Voluptates cumque",
+    bio: " Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus veritatis sed quidem earum aliquid quod a non accusantium? Voluptates cumque",
   },
   {
     nome: "Leandro da Silva",
@@ -37,7 +35,8 @@ const data = [
   },
   {
     nome: "Icaro Nascimento",
-    avatar: "http://pm1.narvii.com/7192/b8b8ce61a1c01cce0791258ef8c6adc6bd22520cr1-451-679v2_00.jpg",
+    avatar:
+      "http://pm1.narvii.com/7192/b8b8ce61a1c01cce0791258ef8c6adc6bd22520cr1-451-679v2_00.jpg",
     profissao: " Dev/Estudante Front-End",
     bio: " Bom dia",
   },
@@ -58,22 +57,19 @@ const data = [
     nome: "Izabela Zin",
     avatar: "https://github.com/izabelazin.png",
     profissao: "Analista de Onboarding",
-    bio:
-      "Analista de Onboarding na DM, aspirante a APM e, possivelmente, uma futura desenvolvedora de sistemas.",
+    bio: "Analista de Onboarding na DM, aspirante a APM e, possivelmente, uma futura desenvolvedora de sistemas.",
   },
   {
     nome: "Fernando Silva",
     avatar: "https://github.com/fernandosmo.png",
     profissao: "Desenvolvedor no futuro próximo",
-    bio:
-      "Coordenador de loja migrando para a carreira Dev e graças ao DevInHouse, isso será logo!",
+    bio: "Coordenador de loja migrando para a carreira Dev e graças ao DevInHouse, isso será logo!",
   },
   {
     nome: "Amanda Amabili",
     avatar: "https://github.com/amandaamabili.png",
     profissao: "Professora de programação",
-    bio:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus veritatis sed quidem earum aliquid quod a non accusantium? Voluptates cumque",
+    bio: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus veritatis sed quidem earum aliquid quod a non accusantium? Voluptates cumque",
   },
   {
     nome: "Lucas Klein",
@@ -85,7 +81,6 @@ const data = [
     nome: "Priscilla Rarimmy",
     avatar: "https://github.com/priscillararimmy.png",
     profissao: "Estudante",
-    bio:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus veritatis sed quidem earum aliquid quod a non accusantium? Voluptates cumque",
+    bio: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus veritatis sed quidem earum aliquid quod a non accusantium? Voluptates cumque",
   },
 ];
