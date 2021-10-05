@@ -44,6 +44,7 @@ main {
 }
 
 .card {
+  position: relative;
   width: 320px;
   background-color: white;
   border: 1px solid #e3e3e3;
@@ -53,7 +54,6 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  cursor: pointer;
 }
 
 .card:hover {
@@ -68,6 +68,25 @@ main {
 .card span {
   font-weight: 300;
   margin-bottom: 20px;
+}
+
+.card > button {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  background-color: #f23918;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  padding: 15px;
+  color: white;
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+}
+
+.card > button:hover {
+  background-color: #f65538;
+  transform: rotate(-0.025turn);
 }
 
 .card-content {
