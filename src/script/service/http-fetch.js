@@ -10,7 +10,7 @@ export default class ServicoHttpFetch {
       return carga;
     }
 
-    let resposta = await fetch(carga);
+    let resposta = await fetch(this.url);
     if (resposta.ok) {
       let dados = await resposta.json();
       return dados;

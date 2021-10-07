@@ -17,7 +17,6 @@ export default class CardRender {
             <h2>Bio:</h2>
             <p>${usuario.bio}</p>
           </div>
-          
       `;
   }
 

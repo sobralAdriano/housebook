@@ -10,7 +10,7 @@ export default class ControladorNovoAmigo {
 
     this.localStg = new ServicoLocalStorage("amigos");
     this.repositorioAmigos = new RepositorioAmigos();
-    this.httpService = new ServicoHttpFetch();
+    this.httpService = new ServicoHttpFetch("http://localhost:3000/amigos");
     this.cardRender = new CardRender(document.querySelector("#card-list"));
 
     this.cardRender.listenerDeletarCard = this.remover.bind(this);
@@ -40,7 +40,6 @@ export default class ControladorNovoAmigo {
     this.campoAvatar.value = "";
     this.campoProf.value = "";
     this.campoBio.value = "";
-
     this.campoNome.focus();
   }
 
