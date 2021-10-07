@@ -1,33 +1,4 @@
-export default class RepositorioAmigos {
-  // Vamos deixar nossa lista de amigos privada
-  #amigos = [];
-
-  constructor() {
-    this.#amigos = JSON.parse(localStorage.getItem("amigos")) || [];
-    // carga inicial que configuramos na aula. Tá na linha 29, ali embaixo
-    data.forEach((amigo) => this.#amigos.push(amigo));
-  }
-
-  // Deleta um amigo. Vc pode mudar a forma como isso acontece,
-  // desde que o amigo seja deletado da lista. As outras classes
-  // que implementaram este método não sabem como vc faz isso, mas vc faz
-  deletarAmigo(indice) {
-    this.#amigos.splice(indice, 1);
-  }
-
-  // a mesma coisa que o método de cima, mas ao contrário
-  adicionarAmigo(amigoObj) {
-    this.#amigos.push(amigoObj);
-  }
-
-  // função helper pra retornar a lista de amigos,
-  // já que nossa lista agora é privada
-  get lista() {
-    return this.#amigos;
-  }
-}
-
-const data = [
+const carga = [
   {
     nome: "Michael Nascimento",
     avatar: "https://github.com/mikansc.png",
@@ -97,3 +68,5 @@ const data = [
     bio: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus veritatis sed quidem earum aliquid quod a non accusantium? Voluptates cumque",
   },
 ];
+
+export default carga;

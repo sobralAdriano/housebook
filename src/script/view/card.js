@@ -1,40 +1,62 @@
 export default class CardRender {
-  // oba, preciso do elemento que vai receber a lista
-  // Já coloco no construtor pra garantir...
   constructor(elemento) {
-    this.cardList = elemento;
+    this.cardListEl = elemento;
+    this.listeners = {
+      remover: null,
+    };
   }
 
-  // método que adiciona os listeners de remoção
-  // Recebe a lista, não importa qual, e a função que vai remover,
-  // não importa como.
-  adicionarListenerRemocao(listaAmigos, fnRemocao) {
-    listaAmigos.forEach((amigo, indice) => {
-      document
-        .getElementById(`btn-deletar-${indice}`)
-        .addEventListener("click", fnRemocao);
-    });
+  #gerarTemplateCard(usuario) {
+    return `
+          <div class="avatar">
+            <img src="${usuario.avatar}">
+          </div>
+          <h2>${usuario.nome}</h2>
+          <span>${usuario.profissao}</span>
+          <div class="card-content">
+            <h2>Bio:</h2>
+            <p>${usuario.bio}</p>
+          </div>
+          
+      `;
   }
 
-  // Aqui é auto-explicativo, vai... #preguiçaDeEscrever😅
+  #gerarNodeBotaoRemover(id) {
+    const botao = document.createElement("button");
+    botao.innerText = "X";
+    botao.id = `btn-deletar-${id}`;
+    botao.dataset.index = id;
+    botao.addEventListener("click", this.listeners.remover);
+    return botao;
+  }
+
+  #gerarNodeCard(usuario, id) {
+    let cardEl = document.createElement("div");
+    cardEl.classList.add("card");
+    cardEl.innerHTML = this.#gerarTemplateCard(usuario);
+    cardEl.appendChild(this.#gerarNodeBotaoRemover(id));
+    return cardEl;
+  }
+
+  #limparPagina() {
+    this.cardListEl.innerHTML = null;
+  }
+
   renderizar(listaUsuarios) {
-    this.cardList.innerHTML = listaUsuarios
-      .map((usuario, indice) => {
-        return `
-            <div class='card'>
-              <div class="avatar">
-                <img src="${usuario.avatar}">
-              </div>
-              <h2>${usuario.nome}</h2>
-              <span>${usuario.profissao}</span>
-              <div class="card-content">
-                <h2>Bio:</h2>
-                <p>${usuario.bio}</p>
-              </div>
-              <button id='btn-deletar-${indice}' data-index="${indice}">X</button>
-            </div>
-           `;
-      })
-      .join("");
+    let arrayElementos = listaUsuarios.map((usuario, indice) => {
+      return this.#gerarNodeCard(usuario, indice);
+    });
+    if (arrayElementos.length > 0) {
+      this.#limparPagina();
+      arrayElementos.forEach((el) => this.cardListEl.appendChild(el));
+    } else {
+      this.cardListEl.innerHTML = `<p class="empty-cards">Nenhum amigo encontrado.</p>`;
+    }
+  }
+
+  set listenerDeletarCard(funcao) {
+    this.listeners = {
+      remover: funcao,
+    };
   }
 }
